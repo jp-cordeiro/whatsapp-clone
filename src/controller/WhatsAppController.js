@@ -3,6 +3,7 @@ class WhatsAppController {
     constructor(){
         this.elementsPrototype()
         this.loadElements();
+        this.initEvents();
     }
 
     loadElements(){
@@ -61,5 +62,69 @@ class WhatsAppController {
         Element.prototype.hasClass = function(name){
             return this.classList.contains(name)
         }
+
+        HTMLFormElement.prototype.getForm = function(){
+            return new FormData(this)
+        }
+
+        HTMLFormElement.prototype.toJson = function(){
+            let json = {}
+
+            this.getForm().forEach( (value, key) => {
+                json[key] = value
+            })
+
+            return json;
+        }
+    }
+
+    initEvents(){
+        this.el.myPhoto.on('click', e => {
+            this.closeAllLeftPanels()
+            this.el.panelEditProfile.show()
+            setTimeout( _ => this.el.panelEditProfile.addClass('open'), 100)
+        })
+
+        this.el.btnClosePanelEditProfile.on('click', e =>{
+            this.el.panelEditProfile.removeClass('open')
+        })
+
+        this.el.btnNewContact.on('click', e => {
+            this.closeAllLeftPanels()
+            this.el.panelAddContact.show()
+            setTimeout( _ => this.el.panelAddContact.addClass('open'), 100)      
+        })
+
+        this.el.btnClosePanelAddContact.on('click', e =>{
+            this.el.panelAddContact.removeClass('open')
+        })
+
+        this.el.photoContainerEditProfile.on('click', e => {
+            this.el.inputProfilePhoto.click()
+        })
+
+        this.el.inputNamePanelEditProfile.on('keypress', e => {
+            if(e.key === 'Enter'){
+                e.preventDefault()
+
+                this.el.btnSavePanelEditProfile.click()
+            }
+        })
+
+        this.el.btnSavePanelEditProfile.on('click', e => {
+
+        })
+
+        this.el.formPanelAddContact.on('submit', e => {
+            e.preventDefault()
+
+            let formData = new FormData(this.el.formPanelAddContact)
+
+        })
+    }
+
+    closeAllLeftPanels(){
+        this.el.panelAddContact.hide();
+        this.el.panelEditProfile.hide();
     }
 }
