@@ -86,13 +86,50 @@ class WhatsAppController {
         })
 
         this.el.btnClosePanelEditProfile.on('click', e =>{
+            this.el.home.hide();
             this.el.panelEditProfile.removeClass('open')
+        })
+
+        this.el.contactsMessagesList.querySelectorAll('.contact-item').forEach(item => {
+            item.on('click', e => {
+                this.el.home.hide()
+                this.el.main.css({display: 'flex'})
+            })            
         })
 
         this.el.btnNewContact.on('click', e => {
             this.closeAllLeftPanels()
             this.el.panelAddContact.show()
             setTimeout( _ => this.el.panelAddContact.addClass('open'), 100)      
+        })
+
+        this.el.btnAttach.on('click', e => {
+            e.stopPropagation()
+            this.el.menuAttach.addClass('open')
+
+            document.addEventListener('click', this.closeMenuAttach.bind(this))
+        })
+
+        this.el.btnAttachPhoto.on('click', e => {
+            this.el.inputPhoto.click()
+        })
+
+        this.el.inputPhoto.on('change', e => {
+            [...this.el.inputPhoto.files].forEach( file => {
+                
+            })
+        })
+
+        this.el.btnAttachCamera.on('click', e => {
+            
+        })
+
+        this.el.btnAttachDocument.on('click', e => {
+            
+        })
+
+        this.el.btnAttachContact.on('click', e => {
+            
         })
 
         this.el.btnClosePanelAddContact.on('click', e =>{
@@ -121,6 +158,11 @@ class WhatsAppController {
             let formData = new FormData(this.el.formPanelAddContact)
 
         })
+    }
+
+    closeMenuAttach(e){
+        document.removeEventListener('click', this.closeMenuAttach)
+        this.el.menuAttach.removeClass('open')
     }
 
     closeAllLeftPanels(){
