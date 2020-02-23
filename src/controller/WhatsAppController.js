@@ -27,7 +27,7 @@ class WhatsAppController {
 
         Element.prototype.toggle = function(){
             this.style.display = (this.style.display === 'none') ? 'block' : 'none'
-            return this; 
+            return this;
         }
 
         Element.prototype.on = function(events, fn){
@@ -112,7 +112,7 @@ class WhatsAppController {
          this.el.btnNewContact.on('click', e => {
             this.closeAllLeftPanels()
             this.el.panelAddContact.show()
-            setTimeout( _ => this.el.panelAddContact.addClass('open'), 100)      
+            setTimeout( _ => this.el.panelAddContact.addClass('open'), 100)
         })
 
         this.el.btnClosePanelAddContact.on('click', e =>{
@@ -131,7 +131,7 @@ class WhatsAppController {
             item.on('click', e => {
                 this.el.home.hide()
                 this.el.main.css({display: 'flex'})
-            })            
+            })
         })
 
         //Attach
@@ -151,7 +151,7 @@ class WhatsAppController {
 
         this.el.inputPhoto.on('change', e => {
             [...this.el.inputPhoto.files].forEach( file => {
-                
+
             })
         })
 
@@ -171,7 +171,7 @@ class WhatsAppController {
         })
 
         this.el.btnTakePicture.on('click' , _ => {
-            
+
         })
 
         //Document
@@ -194,7 +194,7 @@ class WhatsAppController {
         })
 
         this.el.btnAttachContact.on('click', e => {
-            
+
         })
 
         //Contact
@@ -219,7 +219,42 @@ class WhatsAppController {
         })
 
         this.el.btnFinishMicrophone.on('click', e => {
-            this.closeRecordMicrophone()  
+            this.closeRecordMicrophone()
+        })
+
+        //Messages
+        this.el.inputText.on('keypess', e => {
+            if(e.key === 'Enter' && !e.ctrlKey){
+                e.preventDefault()
+
+                this.el.btnSend.click()
+            }
+        })
+
+        this.el.inputText.on('keyup', e => {
+            if(this.el.inputText.innerHTML.length){
+                this.el.inputPlaceholder.hide()
+                this.el.btnSendMicrophone.hide()
+                this.el.btnSend.show()
+            }else{
+                this.el.inputPlaceholder.show()
+                this.el.btnSendMicrophone.show()
+                this.el.btnSend.hide()
+            }
+        })
+
+        this.el.btnSend.on('click', e => {
+
+        })
+
+        this.el.btnEmojis.on('click', e => {
+            this.el.panelEmojis.toggleClass('open')
+        })
+
+        this.el.panelEmojis.querySelectorAll('.emojik').forEach(emoji => {
+            emoji.on('click', e => {
+                
+            })
         })
     }
 
@@ -242,7 +277,7 @@ class WhatsAppController {
     closeRecordMicrophone(){
         this.el.recordMicrophone.hide()
         this.el.btnSendMicrophone.show()
-        clearInterval(this._recordMicrophoneInterval)   
+        clearInterval(this._recordMicrophoneInterval)
     }
 
     startRecordMicrophoneTime(){
