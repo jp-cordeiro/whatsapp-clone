@@ -1,0 +1,25 @@
+{
+  "name": "whatsapp-clone",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido como estudo do Curso de JavaScript na Udemy.com.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jp-cordeiro/whatsapp-clone.git"
+  },
+  "author": "jp-cordeiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jp-cordeiro/whatsapp-clone/issues"
+  },
+  "homepage": "https://github.com/jp-cordeiro/whatsapp-clone#readme",
+  "dependencies": {
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.1"
+  }
+}
